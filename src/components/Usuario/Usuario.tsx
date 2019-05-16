@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { preferencia } from '../../stores/store';
+//import { preferencia } from '../../stores/store';
 
 class Usuario extends Component <any, any> {
     constructor(props: any) {
