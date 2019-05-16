@@ -19,13 +19,13 @@ class App extends Component <any, any> {
     return (
       <div className="App">
         <div className="row">
-            <Listas/>
+          <Listas/>
         </div>
         <div className="row">
-          <input type="file" className='csvFileInput' />
+          doewid
         </div>
         <div className="row">
-        
+        dpoewjdoiew
         </div>
       </div>
     );

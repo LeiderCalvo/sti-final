@@ -1,0 +1,24 @@
+@import '../../utils/vars';
+
+.App {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    
+    *{
+        margin: 0;
+        padding: 0;
+    }
+}
+  
+.row{
+    height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include scrollBar();
+}

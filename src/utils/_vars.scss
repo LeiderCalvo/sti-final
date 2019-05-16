@@ -1,0 +1,29 @@
+@mixin centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+@mixin scrollBar {
+    overflow-y: hidden;
+    &:hover {
+        overflow-y: auto
+    }
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #888;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #f2f2f2;
+    }
+}

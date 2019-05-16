@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-//import { preferencia } from '../../stores/store';
+import { observer } from 'mobx-react';
+import './Usuario.css';
 
+@observer
 class Usuario extends Component <any, any> {
     constructor(props: any) {
         super(props);
@@ -9,10 +11,11 @@ class Usuario extends Component <any, any> {
     render(){
         return (
             <div className='usuario'>
-                <h3>{this.props.id}</h3>
-                <h3>{this.props.nombre}</h3>
-                <h3>{this.props.edad}</h3>
-                <h3>{this.props.preferencias}</h3>
+                {/* this.props.data && this.props.data.map((dato: String)=>{
+                    return <h3>{dato}</h3>
+                }) */}
+                <p>{this.props.data && this.props.data[1]}</p>
+                <p>{this.props.data && this.props.data[2]}</p>
             </div>
         );
     };
