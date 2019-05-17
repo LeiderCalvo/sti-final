@@ -24,6 +24,8 @@ src/components/Listas/Listas.css.map
 src/components/Listas/Listas.css
 src/components/Usuario/Usuario.css.map
 src/components/Usuario/Usuario.css
+src/components/Acciones/Acciones.css.map
+src/components/Acciones/Acciones.css
 
 npm-debug.log*
 yarn-debug.log*

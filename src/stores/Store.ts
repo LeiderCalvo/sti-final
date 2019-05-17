@@ -10,9 +10,28 @@ class Store{
     @observable dataBase : db | null = null;
     @observable seleccionados: String[] | null = null;
     @observable isAllSelected: boolean = false;
+    
 
     constructor() {
         this.getData = this.getData.bind(this);
+    }
+
+    @computed get currentActions(){
+        let actions = '';
+        if(this.seleccionados){
+            if (this.seleccionados.length==1) {
+                actions = 'just uno'
+            }else if (this.seleccionados.length>1) {
+                actions = 'varios'
+            }else if (this.dataBase && this.seleccionados.length == (this.dataBase.length)) {
+                actions = 'todos'
+            }if (this.seleccionados.length==0) {
+                actions = 'ninguno'
+            }
+        }else{
+            actions = 'seleccionados isFalsy';
+        }
+        return actions;
     }
 
     @action setDataBase(db : db){

@@ -4,6 +4,7 @@ import Listas from '../Listas/Listas';
 //import Papa from 'papaparse';
 import store from '../../stores/store';
 import { observer } from 'mobx-react';
+import Acciones from '../Acciones/Acciones';
 
 @observer
 class App extends Component <any, any> {
@@ -25,17 +26,23 @@ class App extends Component <any, any> {
     store.setAllSelected(!store.isAllSelected);
   }
 
+  disSelectAll(){
+    let selecteds: String[] = [];
+    store.setSeleccionados(selecteds);
+    store.setAllSelected(false);
+  }
+
   render(){
     return (
       <div className="App">
         <div className="row" id='usuarios'>
           <h3 className='titulo'>Usuarios</h3>
           <Listas/>
-          <p className='btn' onClick={this.selectAll}>{store.isAllSelected? 'Diselect All' : 'Selct All'}</p>
+          <p className='btn'onClick={store.seleccionados && store.seleccionados.length >0? this.disSelectAll : this.selectAll}>{store.seleccionados && store.seleccionados.length >0? 'Diselect All' : 'Selct All'}</p>
         </div>
         <div className="row">
           <h3 className='titulo'>Acciones</h3>
-          
+          <Acciones/>
         </div>
         <div className="row">
           <h3 className='titulo'>Resultados</h3>
