@@ -3,10 +3,12 @@ import Papa from 'papaparse'
 //export type preferencia = { musica: [], comida: [], bebida: [] };
 
 export type db = usuario[];
+//export type usuario = String[];
 export type usuario = String[];
 
 class Store{
     @observable dataBase : db | null = null;
+    @observable seleccionados: String[] | null = null; 
 
     constructor() {
         this.getData = this.getData.bind(this);
@@ -14,6 +16,10 @@ class Store{
 
     @action setDataBase(db : db){
         this.dataBase = db;
+    }
+
+    @action setSeleccionados(selecteds: String[] | null){
+        this.seleccionados = selecteds;
     }
 
     loadCsv() {

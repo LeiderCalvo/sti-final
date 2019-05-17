@@ -14,7 +14,7 @@ class Listas extends Component <any, any>{
         return (
             <div className='listas'>
                 {store.dataBase && store.dataBase.map((user, index)=>{
-                    return index>0 && <div className='card' key={index}><Usuario data={user}/></div>;
+                    return index>0 && <div className='card' key={index}><Usuario data={user} id={index+''}/></div>;
                 })} 
             </div>
         );

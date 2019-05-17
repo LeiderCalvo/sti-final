@@ -18,14 +18,17 @@ class App extends Component <any, any> {
   render(){
     return (
       <div className="App">
-        <div className="row">
+        <div className="row" id='usuarios'>
+          <h3 className='titulo'>Usuarios</h3>
           <Listas/>
         </div>
         <div className="row">
-          doewid
+          <h3 className='titulo'>Acciones</h3>
+          
         </div>
         <div className="row">
-        dpoewjdoiew
+          <h3 className='titulo'>Resultados</h3>
+          
         </div>
       </div>
     );
