@@ -6,15 +6,11 @@ import '../Listas/Listas.css';
 
 @observer
 class Listas extends Component <any, any>{
-    constructor(props: {}) {
-        super(props);
-    }
-
     render(){
         return (
             <div className='listas'>
                 {store.dataBase && store.dataBase.map((user, index)=>{
-                    return index>0 && <div className='card' key={index}><Usuario data={user} id={index+''}/></div>;
+                    return index>0 && <div className='userContainer' key={index}><Usuario data={user} id={index+''}/></div>;
                 })} 
             </div>
         );

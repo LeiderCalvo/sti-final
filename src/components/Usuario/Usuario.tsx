@@ -8,24 +8,38 @@ class Usuario extends Component <any, any> {
     constructor(props: any) {
         super(props);
         this.seleccionar = this.seleccionar.bind(this);
+    }
 
-        let selects = store.seleccionados;
+    desSeleccionar(selects: String[]){
+        var index = selects.indexOf(this.props.id);
+        if (index > -1) {
+            selects.splice(index, 1);
+        }
     }
 
     seleccionar(){
         let selects = store.seleccionados;
-        console.log(selects);
-        selects.push({data: this.props.data, id: selects.length+''});
-        console.log(selects);
+
+        if(selects && selects.length > 0){
+            let exist = selects.find((select)=>{
+                return select == this.props.id;
+            });
+            exist? this.desSeleccionar(selects) : selects = [...selects, this.props.id];
+        }else{
+            selects = [this.props.id];
+        }
+
         store.setSeleccionados(selects);
     }
 
     render(){
         return (
-            <div className='usuario' onClick={this.seleccionar}>
+            <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
                 {/* this.props.data && this.props.data.map((dato: String)=>{
                     return <h3>{dato}</h3>
                 }) */}
+                {//<p>{this.props.id && this.props.id}</p>
+                }
                 <p>{this.props.data && this.props.data[1]}</p>
                 <p>{this.props.data && this.props.data[2]}</p>
             </div>

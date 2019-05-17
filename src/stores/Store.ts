@@ -8,7 +8,8 @@ export type usuario = String[];
 
 class Store{
     @observable dataBase : db | null = null;
-    @observable seleccionados: String[] | null = null; 
+    @observable seleccionados: String[] | null = null;
+    @observable isAllSelected: boolean = false;
 
     constructor() {
         this.getData = this.getData.bind(this);
@@ -20,6 +21,10 @@ class Store{
 
     @action setSeleccionados(selecteds: String[] | null){
         this.seleccionados = selecteds;
+    }
+
+    @action setAllSelected(val: boolean){
+        this.isAllSelected = val;
     }
 
     loadCsv() {
