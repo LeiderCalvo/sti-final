@@ -9,9 +9,15 @@ class Listas extends Component <any, any>{
     render(){
         return (
             <div className='listas'>
-                {store.dataBase && store.dataBase.map((user, index)=>{
-                    return index>0 && <div className='userContainer' key={index}><Usuario data={user} id={index+''}/></div>;
-                })} 
+                {store.isListaUsuarios?
+                    store.dataBase && store.dataBase.map((user, index)=>{
+                        return index>0 && <div className='userContainer' key={index+'user'}><Usuario data={user} id={index+''}/></div>;
+                    })
+                :
+                    store.dataBase && store.dataBase[0].map((genero, index)=>{
+                        return index>3 && index<20 && <div className='userContainer' key={index+'genero'}><Usuario data={genero} id={index+''}/></div>;
+                    })
+                } 
             </div>
         );
     };

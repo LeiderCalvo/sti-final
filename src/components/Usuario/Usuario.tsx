@@ -22,7 +22,7 @@ class Usuario extends Component <any, any> {
 
         if(selects && selects.length > 0){
             let exist = selects.find((select)=>{
-                return select == this.props.id;
+                return select === this.props.id;
             });
             exist? this.desSeleccionar(selects) : selects = [...selects, this.props.id];
         }else{
@@ -34,15 +34,16 @@ class Usuario extends Component <any, any> {
 
     render(){
         return (
-            <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
-                {/* this.props.data && this.props.data.map((dato: String)=>{
-                    return <h3>{dato}</h3>
-                }) */}
-                {//<p>{this.props.id && this.props.id}</p>
-                }
-                <p>{this.props.data && this.props.data[1]}</p>
-                <p>{this.props.data && this.props.data[2]}</p>
-            </div>
+                //<p>{this.props.id && this.props.id}</p>
+                store.isListaUsuarios?
+                <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
+                    <p>{this.props.data && this.props.data[1]}</p>
+                    <p>{this.props.data && this.props.data[2]}</p>
+                </div>
+                :
+                <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
+                    <p>{this.props.data && this.props.data}</p>
+                </div>
         );
     };
 }

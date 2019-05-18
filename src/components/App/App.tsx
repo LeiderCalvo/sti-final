@@ -8,9 +8,11 @@ import Acciones from '../Acciones/Acciones';
 
 @observer
 class App extends Component <any, any> {
+  /*
   constructor(props: any) {
     super(props);
   }
+  */
 
   componentWillMount() {
     store.loadCsv();
@@ -36,7 +38,10 @@ class App extends Component <any, any> {
     return (
       <div className="App">
         <div className="row" id='usuarios'>
-          <h3 className='titulo'>Usuarios</h3>
+          <h3 className='titulo' onClick={()=>{
+            this.disSelectAll();
+            store.setListaUsuarios(!store.isListaUsuarios)
+          }}>{store.isListaUsuarios? 'Usuarios' : 'Generos'}</h3>
           <Listas/>
           <p className='btn'onClick={store.seleccionados && store.seleccionados.length >0? this.disSelectAll : this.selectAll}>{store.seleccionados && store.seleccionados.length >0? 'Diselect All' : 'Selct All'}</p>
         </div>
