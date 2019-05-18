@@ -6,6 +6,38 @@ import '../Acciones/Acciones.css';
 @observer
 class Acciones extends Component<any, any>{
 
+    clickGo(titulo: String){
+        switch (titulo) {
+            case 'Elementos Principales':
+                
+            break;
+
+            case 'Cantidad Amigos':
+                
+            break;
+
+            case 'Elementos del Festival':
+                
+            break;
+
+            case 'Cantidad de invitados':
+                
+            break;
+
+            case 'Tipo de Bebida':
+                
+            break;
+
+            case 'Tipo de Comida':
+                
+            break;
+
+            case 'Generos Cercanos':
+                
+            break;
+        }
+    }
+
     render(){
         return(
             <div className="acciones">
@@ -21,12 +53,20 @@ class Acciones extends Component<any, any>{
                             <div className={action.opciones.vals && action.opciones.vals.length>3? "opciones grande" : "opciones"}>
                                 {action.opciones.vals && action.opciones.vals.map((val, ind)=>{
                                     return <div key={ind+'val'} className="opcion">
-                                        <input type={`${action.opciones.tipo}`} name={`${val}`} id={`${action.opciones.tipo}`}/>
+                                        <input type={`${action.opciones.tipo}`} name={`${val}`} id={`${action.opciones.tipo}`}
+                                        onChange={(e)=>{
+                                            action.opciones.vals && console.log(action.opciones.vals[ind] +' '+ action.opciones.values[ind]);
+                                            console.log(e.target.valueAsNumber);
+                                            action.opciones.values[ind] === '0'? 
+                                                store.setValuesFunciones(e.target.valueAsNumber+'',action.titulo,ind)
+                                            : 
+                                                store.setValuesFunciones(e.target.checked + '',action.titulo,ind);
+                                        }}/>
                                         <p>{val==='0'? 'Cantidad' : val}</p>
                                     </div>
                                 })}
                             </div>
-                            <div className="btn">GO</div>
+                            <div className="btn" onClick={()=>this.clickGo(action.titulo)}>GO</div>
                         </div>
                     })
                 }

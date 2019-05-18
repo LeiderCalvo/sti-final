@@ -15,7 +15,7 @@ class Listas extends Component <any, any>{
                     })
                 :
                     store.dataBase && store.dataBase[0].map((genero, index)=>{
-                        return index>3 && index<20 && <div className='userContainer' key={index+'genero'}><Usuario data={genero} id={index+''}/></div>;
+                        return index>=store.rangos[0].min && index<=store.rangos[0].max && <div className='userContainer' key={index+'genero'}><Usuario data={genero} id={index+''}/></div>;
                     })
                 } 
             </div>

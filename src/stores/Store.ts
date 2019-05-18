@@ -6,13 +6,35 @@ export type db = usuario[];
 //export type usuario = String[];
 export type usuario = String[];
 
-export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null} }[];
+export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
 
 class Store{
     @observable dataBase : db | null = null;
     @observable seleccionados: String[] | null = null;
     @observable isAllSelected: boolean = false;
     @observable isListaUsuarios: boolean = true;
+    @observable rangos: {tipo:String, min:number, max:number}[] = [
+        {
+            tipo:'genero',
+            min: 4,
+            max: 19
+        },
+        {
+            tipo:'artistas',
+            min: 20,
+            max: 65
+        },
+        {
+            tipo:'comida',
+            min: 66,
+            max: 94
+        },
+        {
+            tipo:'bebidas',
+            min: 95,
+            max: 110
+        }
+    ];
     @observable funciones: funcion = [
     {
         publico: 'uno',
@@ -20,7 +42,8 @@ class Store{
         descripcion: 'Con esta opción usted podrá conocer la comida, bebidao musica, esencial para un usuario',
         opciones: {
             tipo: 'checkbox',
-            vals: ['comida', 'bebida', 'musica']
+            vals: ['comida', 'bebida', 'musica'],
+            values: ['false','false','false']
         },
     },
     {
@@ -29,7 +52,8 @@ class Store{
         descripcion: 'Hallarás la lista de lsa personas mas cercanas a la seleccionada',
         opciones: {
             tipo: 'number',
-            vals: ['0']
+            vals: ['0'],
+            values: ['0']
         },
     },
     {
@@ -38,7 +62,8 @@ class Store{
         descripcion: 'Hallarás los elementos que deberia tener el festival para un grupo de usuarios',
         opciones: {
             tipo: 'checkbox',
-            vals: ['maxPla', 'com', 'minMis', 'beb', 'prom', 'mus']
+            vals: ['maxPla', 'com', 'minMis', 'beb', 'prom', 'mus'],
+            values: ['false','false','false','false','false','false']
         },
     },
     {
@@ -47,7 +72,8 @@ class Store{
         descripcion: 'Hallarás la cantidad de usuarios que irian a ese festival',
         opciones: {
             tipo: 'null',
-            vals: null
+            vals: null,
+            values: ['']
         },
     },
     {
@@ -56,7 +82,8 @@ class Store{
         descripcion: 'Hallarás la comida que debes vender en ese festival',
         opciones: {
             tipo: 'null',
-            vals: null
+            vals: null,
+            values: ['']
         },
     },
     {
@@ -65,7 +92,8 @@ class Store{
         descripcion: 'Hallarás la Bebida que debes vender en ese festival',
         opciones: {
             tipo: 'null',
-            vals: null
+            vals: null,
+            values: ['']
         },
     },
     {
@@ -74,7 +102,8 @@ class Store{
         descripcion: 'Hallarás los N generos mas cercanos al seleccionado',
         opciones: {
             tipo: 'number',
-            vals: ['0']
+            vals: ['0'],
+            values: ['0']
         },
     }
     ];
@@ -121,6 +150,14 @@ class Store{
 
     @action setListaUsuarios(val: boolean){
         this.isListaUsuarios = val;
+    }
+
+    @action setValuesFunciones(val: String, idfun: String, index: number){
+        for (let i = 0; i < this.funciones.length; i++) {
+            if(this.funciones[i].titulo === idfun){
+                this.funciones[i].opciones.values[index] = val;
+            }
+        }
     }
 
     loadCsv() {
