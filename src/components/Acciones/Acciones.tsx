@@ -18,7 +18,7 @@ class Acciones extends Component<any, any>{
                     store.currentActions.map((action, index)=>{
                         return <div key={index+'accion'} className="card accion">
                             <h4>{action.titulo}</h4>
-                            <div className="opciones">
+                            <div className={action.opciones.vals && action.opciones.vals.length>3? "opciones grande" : "opciones"}>
                                 {action.opciones.vals && action.opciones.vals.map((val, ind)=>{
                                     return <div key={ind+'val'} className="opcion">
                                         <input type={`${action.opciones.tipo}`} name={`${val}`} id={`${action.opciones.tipo}`}/>

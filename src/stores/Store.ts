@@ -38,7 +38,7 @@ class Store{
         descripcion: 'Hallarás los elementos que deberia tener el festival para un grupo de usuarios',
         opciones: {
             tipo: 'checkbox',
-            vals: ['maxPla', 'minMis', 'prom', 'com', 'beb', 'mus']
+            vals: ['maxPla', 'com', 'minMis', 'beb', 'prom', 'mus']
         },
     },
     {

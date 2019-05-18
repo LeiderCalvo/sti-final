@@ -16,6 +16,7 @@
 
         .opciones{
             width: 45%;
+
             .opcion{
                 display: flex;
                 flex-direction: row;
@@ -34,6 +35,23 @@
                     color: gray;
                     font-size: .9em;
                 }
+            }
+        }
+
+        .grande{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 0 5px;
+            width: 50%;
+
+            .opcion{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding-left: 10%;
+                padding-bottom: 8px;
+                width: 40%;
             }
         }
 
