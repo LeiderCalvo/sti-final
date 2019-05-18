@@ -6,7 +6,9 @@
 }
 
 .btn{
-    
+    &:hover{
+        font-weight: 800;
+    }
 }
 
 @mixin scrollBar {

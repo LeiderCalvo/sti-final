@@ -1,3 +1,7 @@
+.btn:hover {
+  font-weight: 800;
+}
+
 .App {
   display: -webkit-box;
   display: -ms-flexbox;
