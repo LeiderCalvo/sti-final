@@ -5,6 +5,7 @@ import Listas from '../Listas/Listas';
 import store from '../../stores/store';
 import { observer } from 'mobx-react';
 import Acciones from '../Acciones/Acciones';
+import Resultados from '../Resultados/Resultados';
 
 @observer
 class App extends Component <any, any> {
@@ -51,7 +52,7 @@ class App extends Component <any, any> {
         </div>
         <div className="row">
           <h3 className='titulo'>Resultados</h3>
-          
+            <Resultados/>
         </div>
       </div>
     );

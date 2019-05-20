@@ -3,7 +3,7 @@ import Papa from 'papaparse'
 //export type preferencia = { musica: [], comida: [], bebida: [] };
 
 export type db = usuario[];
-//export type usuario = String[];
+export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
 export type usuario = String[];
 
 export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
@@ -13,6 +13,17 @@ class Store{
     @observable seleccionados: String[] | null = null;
     @observable isAllSelected: boolean = false;
     @observable isListaUsuarios: boolean = true;
+    @observable resultados:{
+        elementosPrincipales: elemsPrincipales,
+    } = {
+        elementosPrincipales: {
+            userName: '',
+            food: '',
+            drink: '',
+            artist: '',
+            genre: ''
+        }   
+    };
     @observable rangos: {tipo:String, min:number, max:number}[] = [
         {
             tipo:'genero',
@@ -157,6 +168,17 @@ class Store{
             if(this.funciones[i].titulo === idfun){
                 this.funciones[i].opciones.values[index] = val;
             }
+        }
+    }
+
+    @action setResultados(who: String, val: elemsPrincipales){
+        switch (who) {
+            case 'Elementos Principales':
+                this.resultados.elementosPrincipales = val;
+                break;
+        
+            default:
+                break;
         }
     }
 
