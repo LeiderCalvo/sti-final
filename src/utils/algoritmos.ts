@@ -159,6 +159,51 @@ class Algoritmos {
         response.friends = amigos;
         return response;
     }
+
+    fest(guests: any, store: any, vals: boolean[]){
+
+        let nombres = '';
+        guests.friends.map((user: any)=>{
+            return nombres = nombres + user.nombre + ' ';
+        });
+
+        let response: elemsPrincipales = {
+            userName: 'grupo: '+nombres,
+            food: '',
+            drink: '',
+            artist: '',
+            genre: ''
+        };
+
+        let users: usuario[] = [];
+        
+        for (let i = 1; i < store.dataBase.length; i++) {
+            for (let j = 0; j < guests.friends.length; j++) {
+                if(store.dataBase[i][1] === guests.friends[j].nombre){
+                    users = [...users, store.dataBase[i]];
+                }
+            }
+        }
+
+        let user : usuario = [];
+            for (let i = 3; i < store.dataBase[0].length; i++) {
+                let sum = 0;
+                for (let j = 0; j < users.length; j++) {
+                     sum += parseInt(users[j][i]+'') 
+                }
+                let prom = sum / users.length;
+                user[i] = prom+'';
+            }
+            response = this.applyAggregation(user, store, [vals[0], vals[1], vals[2]], 'maximoPlacer', response);
+        /*
+        users.map((user)=>{
+            response = this.applyAggregation(user, store, [vals[0], vals[1], vals[2]], 'maximoPlacer', response);
+            return true;
+        });
+        console.log(response);
+        */
+        return response;
+    }
 }
 
 const algoritmos =  new Algoritmos();

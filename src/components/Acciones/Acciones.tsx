@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store, { usuario } from '../../stores/store';
+import store, { usuario, cantidadAmigos } from '../../stores/store';
 import { observer } from 'mobx-react';
 import '../Acciones/Acciones.css';
 import algoritmos from '../../utils/algoritmos';
@@ -43,16 +43,25 @@ class Acciones extends Component<any, any>{
                     resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
-            case 'Tipo de Bebida':
-                
+            case 'Tipo de Comida':
+                    let gene = store.dataBase && store.seleccionados && parseInt(store.seleccionados[0]+'');
+                    resp = store.dataBase && gene && algoritmos.howManyGuests(gene, store);
+                    resp = store.dataBase && resp && algoritmos.fest(resp, store, [true, false, false]);
+                    resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
-            case 'Tipo de Comida':
-                
+            case 'Tipo de Bebida':
+                    let gener = store.dataBase && store.seleccionados && parseInt(store.seleccionados[0]+'');
+                    resp = store.dataBase && gener && algoritmos.howManyGuests(gener, store);
+                    resp = store.dataBase && resp && algoritmos.fest(resp, store, [false, true, false]);
+                    resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
             case 'Generos Cercanos':
-                
+                    let ge = store.dataBase && store.seleccionados && parseInt(store.seleccionados[0]+'');
+                    resp = store.dataBase && ge && algoritmos.howManyGuests(ge, store);
+                    resp = store.dataBase && resp && algoritmos.fest(resp, store, [false, false, true]);
+                    resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
         }
     }

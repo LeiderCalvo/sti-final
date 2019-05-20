@@ -6,7 +6,7 @@ export type db = usuario[];
 export type usuario = String[];
 export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
 
-export type results = { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos, elemsFest: elemsPrincipales, cantidadInvitados: cantidadAmigos};
+export type results = { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos, elemsFest: elemsPrincipales, cantidadInvitados: cantidadAmigos, tipoComida: elemsPrincipales, tipoBebida: elemsPrincipales, generosCercanos: elemsPrincipales};
 export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
 export type cantidadAmigos = {userName: String, num: number, friends: {nombre: String, dist: number}[]};
 
@@ -66,6 +66,27 @@ class Store{
                 userName: '',
                 num: 0,
                 friends: []
+            },
+            tipoComida : {
+                userName: '',
+                food: '',
+                drink: '',
+                artist: '',
+                genre: ''
+            },
+            tipoBebida: {
+                userName: '',
+                food: '',
+                drink: '',
+                artist: '',
+                genre: ''
+            },
+            generosCercanos: {
+                userName: '',
+                food: '',
+                drink: '',
+                artist: '',
+                genre: ''
             },
         };
     }
@@ -137,9 +158,9 @@ class Store{
                 titulo: 'Generos Cercanos',
                 descripcion: 'Hallarás los N generos mas cercanos al seleccionado',
                 opciones: {
-                    tipo: 'number',
-                    vals: ['0'],
-                    values: ['0']
+                    tipo: 'null',
+                    vals: null,
+                    values: ['']
                 },
             }
             ];
@@ -198,6 +219,7 @@ class Store{
     }
 
     @action setResultados(who: String, val: any){
+        this.resultados = this.initResultados();
         switch (who) {
             case 'Elementos Principales':
                 this.resultados.elementosPrincipales = val;
@@ -213,6 +235,18 @@ class Store{
 
             case 'Cantidad de invitados':
                 this.resultados.cantidadInvitados = val;
+                break;
+            
+            case 'Tipo de Comida':
+                this.resultados.tipoComida = val;
+                break;
+
+            case 'Tipo de Bebida':
+                    this.resultados.tipoBebida = val;
+                break;
+
+            case 'Generos Cercanos':
+                    this.resultados.generosCercanos = val;
                 break;
         }
     }

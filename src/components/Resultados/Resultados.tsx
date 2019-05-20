@@ -27,6 +27,15 @@ class Resultados extends Component<any, any>{
                 store.resultados.cantidadInvitados.userName !== ''?
                 <CantidadAmigos who={store.resultados.cantidadInvitados}/>
             :
+                store.resultados.tipoComida.userName !== ''?
+                <ElementosPrincipales who={store.resultados.tipoComida}/>
+            :
+                store.resultados.tipoBebida.userName !== ''?
+                <ElementosPrincipales who={store.resultados.tipoBebida}/>
+            :
+                store.resultados.generosCercanos.userName !== ''?
+                <ElementosPrincipales who={store.resultados.generosCercanos}/>
+            :
                 <div>No</div>
             }
             </div>
