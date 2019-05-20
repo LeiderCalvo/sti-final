@@ -12,29 +12,29 @@ class ElementosPrincipales extends Component<any, any>{
     render(){
         return (
                 <div className='ElemPrincipales'>
-                    <h4>{store.resultados.elementosPrincipales.userName}</h4>
+                    <h4>{this.props.who.userName}</h4>
                     {
-                        store.resultados.elementosPrincipales.food &&
+                        this.props.who.food &&
                         <div>
                             <h4>Comida</h4>
-                            <p>{store.resultados.elementosPrincipales.food}</p>
+                            <p>{this.props.who.food}</p>
                         </div>
                     }
                     {
-                        store.resultados.elementosPrincipales.drink &&
+                        this.props.who.drink &&
                         <div>
                             <h4>Bebida</h4>
-                            <p>{store.resultados.elementosPrincipales.drink}</p>
+                            <p>{this.props.who.drink}</p>
                         </div>
                     }
 
                     {
-                        store.resultados.elementosPrincipales.artist && store.resultados.elementosPrincipales.genre &&
+                        this.props.who.artist && this.props.who.genre &&
                         <div>
                             <h4>Artista</h4>
-                            <p>{store.resultados.elementosPrincipales.artist}</p>
+                            <p>{this.props.who.artist}</p>
                             <h4>Genero</h4>
-                            <p>{store.resultados.elementosPrincipales.genre}</p>
+                            <p>{this.props.who.genre}</p>
                         </div>
                     }
                 </div>

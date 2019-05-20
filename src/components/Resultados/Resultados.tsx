@@ -7,9 +7,6 @@ import CantidadAmigos from '../Acciones/CantidadAmigos';
 
 @observer
 class Resultados extends Component<any, any>{
-    constructor(props: {}) {
-        super(props);
-    }
 
     render(){
         return (
@@ -19,13 +16,16 @@ class Resultados extends Component<any, any>{
                     <p className='msg'>seleccione algo porfavor</p>
             :
                 store.resultados.elementosPrincipales.userName !== ''?
-                <ElementosPrincipales/>
+                <ElementosPrincipales who={store.resultados.elementosPrincipales}/>
             :
                 store.resultados.cantidadAmigos.userName !== ''?
-                <CantidadAmigos/>
+                <CantidadAmigos who={store.resultados.cantidadAmigos}/>
             :
-                store.resultados.cantidadAmigos.userName !== ''?
-                <CantidadAmigos/>
+                store.resultados.elemsFest.userName !== ''?
+                <ElementosPrincipales who={store.resultados.elemsFest}/>
+            :
+                store.resultados.cantidadInvitados.userName !== ''?
+                <CantidadAmigos who={store.resultados.cantidadInvitados}/>
             :
                 <div>No</div>
             }

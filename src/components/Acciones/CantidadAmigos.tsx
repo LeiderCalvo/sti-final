@@ -12,19 +12,19 @@ class CantidadAmigos extends Component<any, any>{
     render(){
         return (
                 <div className='CanAmigos'>
-                    <h4>{store.resultados.cantidadAmigos.userName}</h4>
+                    <h4>{this.props.who.userName}</h4>
                     {
-                        store.resultados.cantidadAmigos.num>0 &&
+                        this.props.who.num>0 &&
                         <div>
                             <h4>Cantidad</h4>
-                            <p>{store.resultados.cantidadAmigos.num}</p>
+                            <p>{this.props.who.num}</p>
                         </div>
                     }
                     {
-                        store.resultados.cantidadAmigos.friends.length>0 &&
+                        this.props.who.friends.length>0 &&
                         <div>
                             <h4>Amigos</h4>
-                            {store.resultados.cantidadAmigos.friends.map((friend, index)=>{
+                            {this.props.who.friends.map((friend: any, index: number)=>{
                                 return <p key={index}>{friend.nombre}</p>
                             })}
                         </div>

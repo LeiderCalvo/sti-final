@@ -24,6 +24,7 @@ class App extends Component <any, any> {
     !store.isAllSelected && store.dataBase &&
     store.dataBase.map((user, index)=>{
       index>0? selecteds = [...selecteds, index+'']: console.log('no seleccionò el user'+index);
+      return true;
     });
     store.setSeleccionados(selecteds);
     store.setAllSelected(!store.isAllSelected);

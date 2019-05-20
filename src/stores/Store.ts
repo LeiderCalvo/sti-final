@@ -6,6 +6,7 @@ export type db = usuario[];
 export type usuario = String[];
 export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
 
+export type results = { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos, elemsFest: elemsPrincipales, cantidadInvitados: cantidadAmigos};
 export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
 export type cantidadAmigos = {userName: String, num: number, friends: {nombre: String, dist: number}[]};
 
@@ -14,7 +15,7 @@ class Store{
     @observable seleccionados: usuario | null = null;
     @observable isAllSelected: boolean = false;
     @observable isListaUsuarios: boolean = true;
-    @observable resultados: { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos} = this.initResultados();
+    @observable resultados: results = this.initResultados();
     @observable funciones: funcion = this.initFuncion();
 
     @observable rangos: {tipo:String, min:number, max:number}[] = [
@@ -53,7 +54,19 @@ class Store{
                 userName: '',
                 num: 0,
                 friends: []
-            }   
+            },
+            elemsFest: {
+                userName: '',
+                food: '',
+                drink: '',
+                artist: '',
+                genre: ''
+            }, 
+            cantidadInvitados: {
+                userName: '',
+                num: 0,
+                friends: []
+            },
         };
     }
 
@@ -193,8 +206,13 @@ class Store{
             case 'Cantidad Amigos':
                 this.resultados.cantidadAmigos = val;
                 break;
-        
-            default:
+
+            case 'Elementos del Festival':
+                this.resultados.elemsFest = val;
+                break;
+
+            case 'Cantidad de invitados':
+                this.resultados.cantidadInvitados = val;
                 break;
         }
     }

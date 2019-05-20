@@ -38,7 +38,9 @@ class Acciones extends Component<any, any>{
             break;
 
             case 'Cantidad de invitados':
-                
+                    let genero = store.dataBase && store.seleccionados && parseInt(store.seleccionados[0]+'');
+                    resp = store.dataBase && genero && algoritmos.howManyGuests(genero, store);
+                    resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
             case 'Tipo de Bebida':

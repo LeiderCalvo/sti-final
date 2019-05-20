@@ -44,7 +44,7 @@ class Algoritmos {
         return who;
     }
 
-    howManyFriends(user: usuario, store: any, val: number){
+    howManyFriends(user: usuario , store: any, val: number){
         let response: cantidadAmigos = {
             userName: user[1],
             num: val,
@@ -57,7 +57,7 @@ class Algoritmos {
 			if(!(user[1] === store.dataBase[i][1])) {
                 amigos = [...amigos, {
                     nombre: store.dataBase[i][1],
-                    dist: this.masParecidos(user, store.dataBase[i])
+                    dist: this.setDist(user, store.dataBase[i])
                 }]
 			}
         }
@@ -68,7 +68,7 @@ class Algoritmos {
         return response;
     }
 
-    masParecidos(a: usuario, b: usuario) {
+    setDist(a: usuario, b: usuario) {
         let proPunt=0;
         let cuaA=0;
         let cuaB=0;
@@ -135,6 +135,28 @@ class Algoritmos {
         }
 
         //console.log(response);
+        return response;
+    }
+
+    howManyGuests(user: number , store: any){
+        let response: cantidadAmigos = {
+            userName: store.dataBase && store.seleccionados && store.dataBase[0][parseInt(store.seleccionados[0]+'')],
+            num: 0,
+            friends: []
+        };
+
+        let amigos : {nombre: String, dist: number}[] = [];
+
+        for (let i = 1; i < store.dataBase.length; i++) {
+            if(parseInt(store.dataBase[i][parseInt(user+'')]) > 3) {
+                    amigos = [...amigos, {
+                    nombre: store.dataBase[i][1],
+                    dist: 0
+                }]
+            }
+        }
+        response.num = amigos.length;
+        response.friends = amigos;
         return response;
     }
 }
