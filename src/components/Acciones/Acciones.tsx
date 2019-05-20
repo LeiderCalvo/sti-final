@@ -8,17 +8,21 @@ import algoritmos from '../../utils/algoritmos';
 class Acciones extends Component<any, any>{
 
     clickGo(titulo: String){
+        let user = store.dataBase && store.seleccionados && store.dataBase[parseInt(store.seleccionados[0]+'')];
+        let vals;
+        let resp;
+
         switch (titulo) {
             case 'Elementos Principales':
-                let user = store.dataBase && store.seleccionados && store.dataBase[parseInt(store.seleccionados[0]+'')];
-                let vals = store.funciones[0].opciones.values;
-
-                let resp = store.dataBase && user && algoritmos.mainElements(user, store, vals[0]==='true'? true : false, vals[1]==='true'? true : false, vals[2]==='true'? true : false );
+                vals = store.funciones[0].opciones.values;
+                resp = store.dataBase && user && algoritmos.mainElements(user, store, vals[0]==='true'? true : false, vals[1]==='true'? true : false, vals[2]==='true'? true : false );
                 resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
             case 'Cantidad Amigos':
-                
+                vals = store.funciones[1].opciones.values;
+                resp = store.dataBase && user && algoritmos.howManyFriends(user, store, parseInt(vals[0]+''));
+                resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
             case 'Elementos del Festival':

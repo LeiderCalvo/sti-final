@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import store from '../../stores/store';
 import { observer } from 'mobx-react';
+import ElementosPrincipales from '../Acciones/ElementosPrincipales';
+//import '../Acciones/Acciones.css';
 
 @observer
 class Resultados extends Component<any, any>{
@@ -12,19 +14,11 @@ class Resultados extends Component<any, any>{
         return (
             <div className="resultados">
             {
-            store.resultados.elementosPrincipales.userName !== ''?
-                <div>
-                    <h4>Nombre de usuario</h4>
-                    <p>{store.resultados.elementosPrincipales.userName}</p>
-                    <h4>Comida</h4>
-                    <p>{store.resultados.elementosPrincipales.food}</p>
-                    <h4>Bebida</h4>
-                    <p>{store.resultados.elementosPrincipales.drink}</p>
-                    <h4>Artista</h4>
-                    <p>{store.resultados.elementosPrincipales.artist}</p>
-                    <h4>Genero</h4>
-                    <p>{store.resultados.elementosPrincipales.genre}</p>
-                </div>
+                store.seleccionados && store.seleccionados.length >0 && store.resultados.elementosPrincipales.userName !== ''?
+                <ElementosPrincipales/>
+            :
+                store.seleccionados && store.seleccionados.length >0 && store.resultados.cantidadAmigos.userName !== ''?
+                <ElementosPrincipales/>
             :
                 <div>No</div>
             }

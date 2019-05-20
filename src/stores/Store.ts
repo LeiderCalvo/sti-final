@@ -3,27 +3,20 @@ import Papa from 'papaparse'
 //export type preferencia = { musica: [], comida: [], bebida: [] };
 
 export type db = usuario[];
-export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
 export type usuario = String[];
-
 export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
+
+export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
+export type cantidadAmigos = {userName: String, num: number, friends: {nombre: String, dist: number}[]};
 
 class Store{
     @observable dataBase : db | null = null;
     @observable seleccionados: String[] | null = null;
     @observable isAllSelected: boolean = false;
     @observable isListaUsuarios: boolean = true;
-    @observable resultados:{
-        elementosPrincipales: elemsPrincipales,
-    } = {
-        elementosPrincipales: {
-            userName: '',
-            food: '',
-            drink: '',
-            artist: '',
-            genre: ''
-        }   
-    };
+    @observable resultados: { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos} = this.initResultados();
+    @observable funciones: funcion = this.initFuncion();
+
     @observable rangos: {tipo:String, min:number, max:number}[] = [
         {
             tipo:'genero',
@@ -46,78 +39,98 @@ class Store{
             max: 110
         }
     ];
-    @observable funciones: funcion = [
-    {
-        publico: 'uno',
-        titulo: 'Elementos Principales',
-        descripcion: 'Con esta opción usted podrá conocer la comida, bebidao musica, esencial para un usuario',
-        opciones: {
-            tipo: 'checkbox',
-            vals: ['comida', 'bebida', 'musica'],
-            values: ['false','false','false']
-        },
-    },
-    {
-        publico: 'uno',
-        titulo: 'Cantidad Amigos',
-        descripcion: 'Hallarás la lista de lsa personas mas cercanas a la seleccionada',
-        opciones: {
-            tipo: 'number',
-            vals: ['0'],
-            values: ['0']
-        },
-    },
-    {
-        publico: 'varios',
-        titulo: 'Elementos del Festival',
-        descripcion: 'Hallarás los elementos que deberia tener el festival para un grupo de usuarios',
-        opciones: {
-            tipo: 'checkbox',
-            vals: ['maxPla', 'com', 'minMis', 'beb', 'prom', 'mus'],
-            values: ['false','false','false','false','false','false']
-        },
-    },
-    {
-        publico: 'musica',
-        titulo: 'Cantidad de invitados',
-        descripcion: 'Hallarás la cantidad de usuarios que irian a ese festival',
-        opciones: {
-            tipo: 'null',
-            vals: null,
-            values: ['']
-        },
-    },
-    {
-        publico: 'musica',
-        titulo: 'Tipo de Comida',
-        descripcion: 'Hallarás la comida que debes vender en ese festival',
-        opciones: {
-            tipo: 'null',
-            vals: null,
-            values: ['']
-        },
-    },
-    {
-        publico: 'musica',
-        titulo: 'Tipo de Bebida',
-        descripcion: 'Hallarás la Bebida que debes vender en ese festival',
-        opciones: {
-            tipo: 'null',
-            vals: null,
-            values: ['']
-        },
-    },
-    {
-        publico: 'musica',
-        titulo: 'Generos Cercanos',
-        descripcion: 'Hallarás los N generos mas cercanos al seleccionado',
-        opciones: {
-            tipo: 'number',
-            vals: ['0'],
-            values: ['0']
-        },
+
+    initResultados(){
+        return {
+            elementosPrincipales: {
+                userName: '',
+                food: '',
+                drink: '',
+                artist: '',
+                genre: ''
+            },
+            cantidadAmigos: {
+                userName: '',
+                num: 0,
+                friends: []
+            }   
+        };
     }
-    ];
+
+    initFuncion(){
+        return [
+            {
+                publico: 'uno',
+                titulo: 'Elementos Principales',
+                descripcion: 'Con esta opción usted podrá conocer la comida, bebidao musica, esencial para un usuario',
+                opciones: {
+                    tipo: 'checkbox',
+                    vals: ['comida', 'bebida', 'musica'],
+                    values: ['false','false','false']
+                },
+            },
+            {
+                publico: 'uno',
+                titulo: 'Cantidad Amigos',
+                descripcion: 'Hallarás la lista de lsa personas mas cercanas a la seleccionada',
+                opciones: {
+                    tipo: 'number',
+                    vals: ['0'],
+                    values: ['0']
+                },
+            },
+            {
+                publico: 'varios',
+                titulo: 'Elementos del Festival',
+                descripcion: 'Hallarás los elementos que deberia tener el festival para un grupo de usuarios',
+                opciones: {
+                    tipo: 'checkbox',
+                    vals: ['maxPla', 'com', 'minMis', 'beb', 'prom', 'mus'],
+                    values: ['false','false','false','false','false','false']
+                },
+            },
+            {
+                publico: 'musica',
+                titulo: 'Cantidad de invitados',
+                descripcion: 'Hallarás la cantidad de usuarios que irian a ese festival',
+                opciones: {
+                    tipo: 'null',
+                    vals: null,
+                    values: ['']
+                },
+            },
+            {
+                publico: 'musica',
+                titulo: 'Tipo de Comida',
+                descripcion: 'Hallarás la comida que debes vender en ese festival',
+                opciones: {
+                    tipo: 'null',
+                    vals: null,
+                    values: ['']
+                },
+            },
+            {
+                publico: 'musica',
+                titulo: 'Tipo de Bebida',
+                descripcion: 'Hallarás la Bebida que debes vender en ese festival',
+                opciones: {
+                    tipo: 'null',
+                    vals: null,
+                    values: ['']
+                },
+            },
+            {
+                publico: 'musica',
+                titulo: 'Generos Cercanos',
+                descripcion: 'Hallarás los N generos mas cercanos al seleccionado',
+                opciones: {
+                    tipo: 'number',
+                    vals: ['0'],
+                    values: ['0']
+                },
+            }
+            ];
+    }
 
     constructor() {
         this.getData = this.getData.bind(this);
@@ -171,15 +184,28 @@ class Store{
         }
     }
 
-    @action setResultados(who: String, val: elemsPrincipales){
+    @action setResultados(who: String, val: any){
         switch (who) {
             case 'Elementos Principales':
                 this.resultados.elementosPrincipales = val;
+                break;
+
+            case 'Cantidad Amigos':
+                this.resultados.cantidadAmigos = val;
                 break;
         
             default:
                 break;
         }
+    }
+
+    resetAll(){
+        let selecteds: String[] = [];
+        this.setSeleccionados(selecteds);
+        this.setAllSelected(false);
+
+        this.resultados = this.initResultados();
+        this.funciones = this.initFuncion();
     }
 
     loadCsv() {

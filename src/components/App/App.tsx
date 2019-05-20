@@ -30,9 +30,7 @@ class App extends Component <any, any> {
   }
 
   disSelectAll(){
-    let selecteds: String[] = [];
-    store.setSeleccionados(selecteds);
-    store.setAllSelected(false);
+    store.resetAll();
   }
 
   render(){
