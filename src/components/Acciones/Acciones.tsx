@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store from '../../stores/store';
+import store, { usuario } from '../../stores/store';
 import { observer } from 'mobx-react';
 import '../Acciones/Acciones.css';
 import algoritmos from '../../utils/algoritmos';
@@ -26,7 +26,15 @@ class Acciones extends Component<any, any>{
             break;
 
             case 'Elementos del Festival':
-                
+                let users : usuario[] = [];
+                store.seleccionados && store.seleccionados.map((select)=>{
+                    let us = store.dataBase && store.dataBase[parseInt(select+'')]
+                    return users && us? users = [...users, us] : console.log('no tengo todos los usuarios');
+                });
+
+                vals = store.funciones[2].opciones.values;
+                resp = store.dataBase && users && algoritmos.festElements(users, store,vals);
+                resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
             break;
 
             case 'Cantidad de invitados':
@@ -65,7 +73,7 @@ class Acciones extends Component<any, any>{
                                     return(
                                     <div key={ind+'val'} className="opcion">
                                         {action.opciones.tipo === 'number'?     
-                                            <input type='number' name={`${val}`}  id='number' value={`${action.opciones.values[ind]}`}
+                                            <input type='number' min='0' max={store.dataBase? store.dataBase.length -2 : 0} name={`${val}`}  id='number' value={`${action.opciones.values[ind]}`}
                                             onChange={(e)=>{
                                                 store.setValuesFunciones(e.target.valueAsNumber+'',action.titulo,ind)
                                             }}/>

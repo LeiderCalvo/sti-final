@@ -11,7 +11,6 @@ class ElementosPrincipales extends Component<any, any>{
 
     render(){
         return (
-            store.seleccionados && store.seleccionados.length >0 && store.resultados.elementosPrincipales.userName !== ''?
                 <div className='ElemPrincipales'>
                     <h4>{store.resultados.elementosPrincipales.userName}</h4>
                     {
@@ -39,8 +38,6 @@ class ElementosPrincipales extends Component<any, any>{
                         </div>
                     }
                 </div>
-            :
-                <div>No</div>
         );
     };
 }

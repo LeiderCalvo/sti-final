@@ -11,7 +11,7 @@ export type cantidadAmigos = {userName: String, num: number, friends: {nombre: S
 
 class Store{
     @observable dataBase : db | null = null;
-    @observable seleccionados: String[] | null = null;
+    @observable seleccionados: usuario | null = null;
     @observable isAllSelected: boolean = false;
     @observable isListaUsuarios: boolean = true;
     @observable resultados: { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos} = this.initResultados();
