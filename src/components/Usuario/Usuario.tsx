@@ -37,12 +37,12 @@ class Usuario extends Component <any, any> {
                 //<p>{this.props.id && this.props.id}</p>
                 store.isListaUsuarios?
                 <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
-                    <p>{this.props.data && this.props.data[1]}</p>
-                    <p>{this.props.data && this.props.data[2]}</p>
+                    <p>{this.props.data && this.props.data[1].trim().toLowerCase().charAt(0).toUpperCase() + this.props.data[1].trim().toLowerCase().slice(1)}</p>
+                    <p>{this.props.data && this.props.data[2].trim()}</p>
                 </div>
                 :
                 <div className={store.seleccionados && store.seleccionados.includes(this.props.id)? 'card usuario selected': 'card usuario'} onClick={this.seleccionar}>
-                    <p>{this.props.data && this.props.data}</p>
+                    <p>{this.props.data && this.props.data.trim().toLowerCase()}</p>
                 </div>
         );
     };

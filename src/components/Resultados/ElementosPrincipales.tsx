@@ -12,17 +12,24 @@ class ElementosPrincipales extends Component<any, any>{
     render(){
         return (
                 <div className='ElemPrincipales'>
-                    <h4>{this.props.who.userName}</h4>
+                    {this.props.who.userName === 'Todos los usuarios' || !this.props.who.userName.includes(',')?
+                        <h4 className='titulo'>{this.props.who.userName.trim().toLowerCase().charAt(0).toUpperCase()+ this.props.who.userName.trim().toLowerCase().slice(1)}</h4>
+                    :
+                        <div className="titulo">
+                            <h4>Grupo</h4>
+                            <p>{this.props.who.userName}</p>
+                        </div>
+                    }
                     {
                         this.props.who.food &&
-                        <div>
+                        <div className='comida'>
                             <h4>Comida</h4>
                             <p>{this.props.who.food}</p>
                         </div>
                     }
                     {
                         this.props.who.drink &&
-                        <div>
+                        <div className='bebida'>
                             <h4>Bebida</h4>
                             <p>{this.props.who.drink}</p>
                         </div>
@@ -30,7 +37,7 @@ class ElementosPrincipales extends Component<any, any>{
 
                     {
                         this.props.who.artist && this.props.who.genre &&
-                        <div>
+                        <div className='musica'>
                             <h4>Artista</h4>
                             <p>{this.props.who.artist}</p>
                             <h4>Genero</h4>

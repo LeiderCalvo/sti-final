@@ -2,6 +2,12 @@
   font-weight: 800;
 }
 
+.msg {
+  text-align: center;
+  margin: 45% 10%;
+  color: gray;
+}
+
 .App {
   display: -webkit-box;
   display: -ms-flexbox;

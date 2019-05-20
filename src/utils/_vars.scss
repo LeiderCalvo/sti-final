@@ -11,6 +11,12 @@
     }
 }
 
+.msg{
+    text-align: center;
+    margin: 45% 10%;
+    color: gray;
+}
+
 @mixin scrollBar {
     overflow-y: hidden;
     &:hover {

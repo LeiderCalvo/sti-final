@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import store from '../../stores/store';
 import { observer } from 'mobx-react';
-import ElementosPrincipales from '../Acciones/ElementosPrincipales';
-import CantidadAmigos from '../Acciones/CantidadAmigos';
-//import '../Acciones/Acciones.css';
+import ElementosPrincipales from './ElementosPrincipales';
+import CantidadAmigos from './CantidadAmigos';
+import '../Resultados/Resultados.css';
 
 @observer
 class Resultados extends Component<any, any>{
@@ -36,7 +36,7 @@ class Resultados extends Component<any, any>{
                 store.resultados.generosCercanos.userName !== ''?
                 <ElementosPrincipales who={store.resultados.generosCercanos}/>
             :
-                <div>No</div>
+                <div className='msg'>No hay resultados para mostrar</div>
             }
             </div>
         );

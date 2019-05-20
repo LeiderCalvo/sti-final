@@ -1,0 +1,91 @@
+@import '../../utils/vars';
+
+.resultados{
+    //@include scrollBar();
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    *{
+        width: 100%;
+    }
+
+    .ElemPrincipales{
+        width: 90%;
+        height: 90%;
+        *p{
+            max-height: 3.9em;
+            @include scrollBar();
+            margin-bottom: 10px;
+        }
+
+
+        .titulo{
+            max-height: 3em;
+            overflow: hidden;
+            margin-bottom: 10px;
+
+            p{
+                max-height: 2.6em;
+                white-space: nowrap;
+                @include scrollBar();
+                overflow-x: hidden;
+                &:hover {
+                    overflow-x: auto
+                }
+            }
+        }
+
+        .comida{
+            max-height: 5.2em;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .bebida{
+            max-height: 5.2em;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .musica{
+            max-height: 12em;
+            overflow: hidden;
+            margin-bottom: 16px;
+
+            p{
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    .CanAmigos{
+        width: 90%;
+        height: 90%;
+
+        .cantidad{
+            display: flex;
+            justify-content: right;
+            max-height: 5.2em;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .amigos{
+            height: 85%;
+            overflow: hidden;
+            
+            h4{margin-bottom: 10px;}
+            .lista{
+                height: 90%;
+                overflow: hidden;
+                @include scrollBar();
+                p{
+                    margin-bottom: 2px;
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+}

@@ -31,13 +31,13 @@ class Algoritmos {
                 let max = 0;
                     for (let i = store.rangos[index].min ; i < store.rangos[index].max; i++) {
                         if(parseInt(user[i]+'')>max)max = parseInt(user[i]+'');;
-                        if(parseInt(user[i]+'')===max)who.includes(store.dataBase[0][i])?  who = who + ' / ' : who = who + store.dataBase[0][i]  + ' : ';
+                        if(parseInt(user[i]+'')===max)who.includes(store.dataBase[0][i].trim())?  who = who : who = who + store.dataBase[0][i].trim()  + ', ';
                     }
                 return who;
 
             case 'minimaMiseria':
                 for (let i = store.rangos[index].min ; i < store.rangos[index].max; i++) {
-                    if(parseInt(user[i]+'')>3)who.includes(store.dataBase[0][i])?  who = who + ' / ' : who = who + store.dataBase[0][i]  + ' : ';
+                    if(parseInt(user[i]+'')>3)who.includes(store.dataBase[0][i].trim())?  who = who : who = who + store.dataBase[0][i].trim()  + ', ';
                 }
                 return who;
         }
@@ -94,11 +94,11 @@ class Algoritmos {
 
         let nombres = '';
         users.map((user)=>{
-            return nombres = nombres + user[1] + ' ';
+            return nombres = nombres + user[1].trim().toLowerCase().charAt(0).toUpperCase()+ user[1].trim().toLowerCase().slice(1) +', ';
         });
 
         let response: elemsPrincipales = {
-            userName: 'grupo: '+nombres,
+            userName: users.length===store.dataBase.length-1? 'Todos los usuarios' : nombres,
             food: '',
             drink: '',
             artist: '',
@@ -164,11 +164,11 @@ class Algoritmos {
 
         let nombres = '';
         guests.friends.map((user: any)=>{
-            return nombres = nombres + user.nombre + ' ';
+            return nombres = nombres + user.nombre + ', ';
         });
 
         let response: elemsPrincipales = {
-            userName: 'grupo: '+nombres,
+            userName: nombres,
             food: '',
             drink: '',
             artist: '',

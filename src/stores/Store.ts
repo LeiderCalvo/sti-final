@@ -213,6 +213,11 @@ class Store{
     @action setValuesFunciones(val: String, idfun: String, index: number){
         for (let i = 0; i < this.funciones.length; i++) {
             if(this.funciones[i].titulo === idfun){
+                if(index === 0 || index === 2 || index === 4 ){
+                    this.funciones[i].opciones.values[0] = 'false';
+                    this.funciones[i].opciones.values[2] = 'false';
+                    this.funciones[i].opciones.values[4] = 'false';
+                }
                 this.funciones[i].opciones.values[index] = val;
             }
         }
