@@ -99,8 +99,8 @@ class Grafico extends React.Component <any, any>{
         >
           <VerticalGridLines />
           <HorizontalGridLines />
-          <XAxis />
-          <YAxis />
+          <XAxis style={{opacity: 0.7}}/>
+          <YAxis style={{opacity: 0.7}}/>
           <MarkSeries
             colorType="literal"
             data={this.props.store.datos.map((d: any, id: any) => ({...d, id}))}
@@ -111,7 +111,7 @@ class Grafico extends React.Component <any, any>{
               })
             }
             getColor={({id}) =>
-              selectedPointId === id ? '#FF9833' : '#12939A'
+              selectedPointId === id ? '#FF9833' : '#CEFFFB'
             }
             sizeRange={sizeRange}/>
                 <Crosshair values={crosshairValues} className='crossHair' >

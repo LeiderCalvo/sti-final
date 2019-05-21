@@ -30,7 +30,9 @@ class Algoritmos {
             case 'maximoPlacer':
                 let max = 0;
                     for (let i = store.rangos[index].min ; i < store.rangos[index].max; i++) {
-                        if(parseInt(user[i]+'')>max)max = parseInt(user[i]+'');;
+                        if(parseInt(user[i]+'')>max)max = parseInt(user[i]+'');
+                    }
+                    for (let i = store.rangos[index].min ; i < store.rangos[index].max; i++) {
                         if(parseInt(user[i]+'')===max)who.includes(store.dataBase[0][i].trim())?  who = who : who = who + store.dataBase[0][i].trim()  + ', ';
                     }
                 return who;
@@ -184,7 +186,7 @@ class Algoritmos {
                 }
             }
         }
-
+        
         let user : usuario = [];
             for (let i = 3; i < store.dataBase[0].length; i++) {
                 let sum = 0;
@@ -194,7 +196,7 @@ class Algoritmos {
                 let prom = sum / users.length;
                 user[i] = prom+'';
             }
-            response = this.applyAggregation(user, store, [vals[0], vals[1], vals[2]], 'maximoPlacer', response);
+            response = this.applyAggregation(user, store, [vals[0], vals[1], vals[2]], 'minimaMiseria', response);
         /*
         users.map((user)=>{
             response = this.applyAggregation(user, store, [vals[0], vals[1], vals[2]], 'maximoPlacer', response);
