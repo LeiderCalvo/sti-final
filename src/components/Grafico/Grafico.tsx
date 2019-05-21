@@ -20,6 +20,7 @@
 // THE SOFTWARE.
 
 import React from 'react';
+import { observer } from 'mobx-react';
 import {scaleLinear} from 'd3-scale';
 
 import {
@@ -66,23 +67,22 @@ const getDomain = (data: any, key: any) => {
 // magic numbers chosen for design
 const sizeRange = [5, 13];
 const margin = {top: 10, left: 40, bottom: 40, right: 10};
-const width = 300;
-const height = 300;
+const width = 250;
+const height = 200;
+let x : any = null;
+let y : any = null;
 
-// Intentionally using explicit sales here to show another way of using the voronoi
-const x = scaleLinear()
-  .domain(getDomain(DATA, 'x'))
-  .range([0, width]);
-const y = scaleLinear()
-  .domain(getDomain(DATA, 'y'))
-  .range([height, 0]);
-
+@observer
 class Grafico extends React.Component <any, any>{
     constructor(props: any) {
         super(props);
         this.state = {
-            selectedPointId: null
+            selectedPointId: null,
+            crosshairValues: null
         }
+        // Intentionally using explicit sales here to show another way of using the voronoi
+        x = scaleLinear().domain(getDomain(this.props.store.datos, 'x')).range([0, width]);
+        y = scaleLinear().domain(getDomain(this.props.store.datos, 'y')).range([height, 0]);
     }
 
   render() {
@@ -93,7 +93,7 @@ class Grafico extends React.Component <any, any>{
         <XYPlot
           onMouseLeave={() =>
             this.setState({selectedPointId: null, crosshairValues: null})
-          }
+        }
           width={width}
           height={height}
         >
@@ -103,7 +103,7 @@ class Grafico extends React.Component <any, any>{
           <YAxis />
           <MarkSeries
             colorType="literal"
-            data={DATA}
+            data={this.props.store.datos.map((d: any, id: any) => ({...d, id}))}
             onNearestXY={(value, {index}) =>
               this.setState({
                 selectedPointId: index,
@@ -114,7 +114,23 @@ class Grafico extends React.Component <any, any>{
               selectedPointId === id ? '#FF9833' : '#12939A'
             }
             sizeRange={sizeRange}/>
-          {crosshairValues && <Crosshair values={crosshairValues} />}
+                <Crosshair values={crosshairValues} className='crossHair' >
+                    <div style={{backgroundColor: 'red'}}>
+                        {crosshairValues && this.props.store.setGrafString(this.props.arrg[crosshairValues[0].x])}
+                    </div>
+                </Crosshair>
+            {/*
+                <Voronoi
+                extent={[
+                    [margin.left, margin.top],
+                    [width - margin.right, height - margin.bottom]
+                ]}
+                nodes={this.props.data}
+                x={(d: any) => x(d.x)}
+                y={(d: any) => y(d.y)}
+                />
+            */
+            }
         </XYPlot>
       </div>
     );

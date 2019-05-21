@@ -6,10 +6,18 @@ import Grafico from '../Grafico/Grafico';
 @observer
 class ElementosPrincipales extends Component<any, any>{
 
+    componentWillMount(){
+        store.setDatos(this.getDatos());
+    }
+
+    componentDidUpdate(){
+        store.setDatos(this.getDatos());
+    }
+
     componentWillUnmount(){
         store.resetAll();
     }
-    
+
     getDatos(){
         let db : usuario[] = [];
         if(store.seleccionados && store.dataBase){
@@ -18,17 +26,26 @@ class ElementosPrincipales extends Component<any, any>{
             }
         }
 
-        let datos : {x: number, y: number}[] = [];
+        let datos : {x: number, y: number, size: number}[] = [];
+        if(this.props.who.food) datos = [...datos, ...this.foro(db, datos, 2)];
 
+        if(this.props.who.drink) datos = [...datos, ...this.foro(db, datos, 3)];
+        
+        if(this.props.who.artist && this.props.who.genre) datos = [...datos, ...this.foro(db, datos, 0)]
+
+        return datos;
+    }
+
+    foro(db: usuario[], datos : {x: number, y: number, size: number}[], ind: number){
         for (let i = 0; i < db.length; i++) {
-            for (let j = 4; j < db[i].length; j++) {
+            for (let j = store.rangos[ind].min; j < store.rangos[ind === 0? 1 : ind].max; j++) {
                 datos = [...datos,{
                     x: j,
-                    y: parseInt(db[i][j]+'')
+                    y: parseInt(db[i][j]+''),
+                    size: parseInt(db[i][j]+'')
                 }];
             }
         }
-
         return datos;
     }
 
@@ -47,7 +64,13 @@ class ElementosPrincipales extends Component<any, any>{
                     </div>
                     */
                     }
-                    <Grafico/>
+                    <div className='cont'>
+                        <div className='grafContiner'>
+                            <Grafico arrg={store.dataBase && store.dataBase[0]} store={store}/>
+                        </div>
+                    </div>
+                    <p className='grafString'>{store.grafString}</p>
+                    
                     {this.props.who.userName === 'Todos los usuarios' || !this.props.who.userName.includes(',')?
                         <h4 className='titulo'>{this.props.who.userName.trim().toLowerCase().charAt(0).toUpperCase()+ this.props.who.userName.trim().toLowerCase().slice(1)}</h4>
                     :

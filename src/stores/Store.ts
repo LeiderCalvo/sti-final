@@ -17,6 +17,8 @@ class Store{
     @observable isListaUsuarios: boolean = true;
     @observable resultados: results = this.initResultados();
     @observable funciones: funcion = this.initFuncion();
+    @observable grafString: String = 'carcteristica';
+    @observable datos : {x: number, y: number, size: number}[] = [];
 
     @observable rangos: {tipo:String, min:number, max:number}[] = [
         {
@@ -208,6 +210,14 @@ class Store{
 
     @action setListaUsuarios(val: boolean){
         this.isListaUsuarios = val;
+    }
+
+    @action setGrafString(val: String){
+        this.grafString = val;
+    }
+
+    @action setDatos(val: {x: number, y: number, size: number}[]){
+        this.datos = val;
     }
 
     @action setValuesFunciones(val: String, idfun: String, index: number){
