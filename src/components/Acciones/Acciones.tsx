@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import store, { usuario, cantidadAmigos } from '../../stores/store';
+import store, { usuario} from '../../stores/store';
 import { observer } from 'mobx-react';
 import '../Acciones/Acciones.css';
 import algoritmos from '../../utils/algoritmos';
@@ -62,6 +62,34 @@ class Acciones extends Component<any, any>{
                     resp = store.dataBase && ge && algoritmos.howManyGuests(ge, store);
                     resp = store.dataBase && resp && algoritmos.fest(resp, store, [false, false, true]);
                     resp? store.setResultados(titulo, resp) : console.log('no hay respuesta');
+            break;
+
+            case 'Parche musical':
+                    let response = store.dataBase && user && algoritmos.mainElements(user, store, false, false, true);
+                    let temp = response && response.genre.split(',');
+                    let miGenero = temp && temp[0];
+                    let miGeneroNumber;
+                    store.dataBase && store.dataBase[0].map((val, index)=>{
+                        if(val === miGenero) miGeneroNumber = index;
+                    });
+                    let guest = store.dataBase && miGeneroNumber && algoritmos.howManyGuests(miGeneroNumber, store);
+                    let respu : any = store.dataBase && guest && algoritmos.fest(guest, store, [true, false, false]);
+                    
+                    let comidas = respu.food.split(',');
+                    let lugares : any = [];
+                    for (let i = 0; i < comidas.length; i++) {
+                        for (let j = 0; j < store.lugares.length; j++) {
+                            for (let h = 0; h < store.lugares[j].comida.length; h++) {                                
+                                if(comidas[i].trim() === store.lugares[j].comida[h]){
+                                    if(lugares.indexOf(store.lugares[j].nombre) === -1) lugares = [...lugares, store.lugares[j].nombre];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    let final : any = {nombres: respu.userName, comidas: respu.food, lugares: lugares};
+                    final? store.setResultados(titulo, final) : console.log('no hay respuesta');
             break;
         }
     }

@@ -1,4 +1,4 @@
-import { observable, autorun, toJS, action, computed } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import Papa from 'papaparse'
 //export type preferencia = { musica: [], comida: [], bebida: [] };
 
@@ -6,7 +6,7 @@ export type db = usuario[];
 export type usuario = String[];
 export type funcion = {publico:String, titulo:String, descripcion: String, opciones:{tipo:String, vals:String[] | null, values: String[] } }[];
 
-export type results = { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos, elemsFest: elemsPrincipales, cantidadInvitados: cantidadAmigos, tipoComida: elemsPrincipales, tipoBebida: elemsPrincipales, generosCercanos: elemsPrincipales};
+export type results = { elementosPrincipales: elemsPrincipales, cantidadAmigos: cantidadAmigos, elemsFest: elemsPrincipales, cantidadInvitados: cantidadAmigos, tipoComida: elemsPrincipales, tipoBebida: elemsPrincipales, generosCercanos: elemsPrincipales, parchesMusicales: {nombres: String, comidas: String, lugares: String[]};};
 export type elemsPrincipales = {userName: String,food: String,drink: String,artist: String,genre: String};
 export type cantidadAmigos = {userName: String, num: number, friends: {nombre: String, dist: number}[]};
 
@@ -19,6 +19,9 @@ class Store{
     @observable funciones: funcion = this.initFuncion();
     @observable grafString: String = 'carcteristica';
     @observable datos : {x: number, y: number, size: number}[] = [];
+    //"Sushi","Pollo","Crepes","Sopa","Falafel","Postres","Helado", "Mariscos","Ceviche","Tamal","Arroces"
+    @observable lugares : {nombre: String, comida:String[]}[] = [{nombre: 'Tierra verde', comida: ['Vegetariana', 'Vegana', 'Verduras asadas']},
+    {nombre: 'Mandarino`s', comida: ['Vegetariana', 'Vegana']}, {nombre: 'Kibbes', comida: ['Vegetariana', 'Vegana']}, {nombre: 'Govinda', comida: ['Vegetariana', 'Vegana', 'ensaladas']}, {nombre: 'El Barbaro', comida: ['Omnivora', 'Hamburguesa', 'Pizza','Salchipapa', 'burritos', 'Perros']},{nombre: 'El Paisa', comida: ['Omnivora', 'Hamburguesa','Salchipapa', 'Perros']}, {nombre: 'MR BROSS', comida: ['Omnivora', 'Hamburguesa', 'Pizza','tacos', 'Nachos', 'burritos', 'Perros']}, {nombre: 'El Barbaro', comida: ['Curramba', 'Hamburguesa', 'Pizza','Salchipapa', 'burritos', 'Perros']}, {nombre: 'Lokura', comida: ['Omnivora', 'Tostadas con Hogao', 'Mazorca', 'Asados', 'Fritanga', 'Lechona', 'Arepas']}, {nombre: 'Kubanos', comida: ['Omnivora', 'Tostadas con Hogao', 'Mazorca', 'Asados', 'Fritanga', 'Lechona', 'Arepas']}, {nombre: 'Chapu', comida: ['Omnivora', 'Tostadas con Hogao', 'Mazorca', 'Asados', 'Fritanga', 'Lechona', 'Arepas']}, {nombre: 'Creppes', comida: ['Omnivora', 'Crepes', 'Sopa', 'Falafel', 'Postres', 'Helado', 'Mariscos', 'Ceviche', 'Tamal', 'Arroces']}, {nombre: 'El Vargas', comida: ['Omnivora', 'Crepes', 'Sopa','Postres', 'Helado', 'Tamal', 'Arroces']}, {nombre: 'West', comida: ['Omnivora', 'Sopa', 'Falafel', 'Postres', 'Helado', 'Mariscos', 'Ceviche']}];
 
     @observable rangos: {tipo:String, min:number, max:number}[] = [
         {
@@ -90,6 +93,10 @@ class Store{
                 artist: '',
                 genre: ''
             },
+            parchesMusicales: {nombres: '',
+            comidas: '',
+            lugares: []
+        },
         };
     }
 
@@ -159,6 +166,16 @@ class Store{
                 publico: 'musica',
                 titulo: 'Generos Cercanos',
                 descripcion: 'Hallarás los N generos mas cercanos al seleccionado',
+                opciones: {
+                    tipo: 'null',
+                    vals: null,
+                    values: ['']
+                },
+            },
+            {
+                publico: 'uno',
+                titulo: 'Parche musical',
+                descripcion: 'buscas las personas que comparten tu gusto musical, para salir a comer',
                 opciones: {
                     tipo: 'null',
                     vals: null,
@@ -262,6 +279,10 @@ class Store{
 
             case 'Generos Cercanos':
                     this.resultados.generosCercanos = val;
+                break;
+
+            case 'Parche musical':
+                    this.resultados.parchesMusicales = val;
                 break;
         }
     }

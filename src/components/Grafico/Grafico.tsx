@@ -21,7 +21,7 @@
 
 import React from 'react';
 import { observer } from 'mobx-react';
-import {scaleLinear} from 'd3-scale';
+///import {scaleLinear} from 'd3-scale';
 
 import {
   Crosshair,
@@ -30,11 +30,9 @@ import {
   VerticalGridLines,
   XAxis,
   XYPlot,
-  YAxis,
-  LineSeries,
-  Voronoi
+  YAxis
 } from 'react-vis';
-
+/*
 const DATA = [
   {x: 1, y: 4, size: 9},
   {x: 1, y: 5, size: 18},
@@ -63,14 +61,14 @@ const getDomain = (data: any, key: any) => {
   );
   return [min, max];
 };
-
+*/
 // magic numbers chosen for design
 const sizeRange = [5, 13];
-const margin = {top: 10, left: 40, bottom: 40, right: 10};
+//const margin = {top: 10, left: 40, bottom: 40, right: 10};
 const width = 250;
 const height = 200;
-let x : any = null;
-let y : any = null;
+//let x : any = null;
+//let y : any = null;
 
 @observer
 class Grafico extends React.Component <any, any>{
@@ -81,8 +79,8 @@ class Grafico extends React.Component <any, any>{
             crosshairValues: null
         }
         // Intentionally using explicit sales here to show another way of using the voronoi
-        x = scaleLinear().domain(getDomain(this.props.store.datos, 'x')).range([0, width]);
-        y = scaleLinear().domain(getDomain(this.props.store.datos, 'y')).range([height, 0]);
+        //x = scaleLinear().domain(getDomain(this.props.store.datos, 'x')).range([0, width]);
+        //y = scaleLinear().domain(getDomain(this.props.store.datos, 'y')).range([height, 0]);
     }
 
   render() {

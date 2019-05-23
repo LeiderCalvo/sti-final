@@ -4,6 +4,7 @@ import { observer } from 'mobx-react';
 import ElementosPrincipales from './ElementosPrincipales';
 import CantidadAmigos from './CantidadAmigos';
 import '../Resultados/Resultados.css';
+import ParchesMusicales from '../ParchesMusicales/ParchesMusicales';
 
 @observer
 class Resultados extends Component<any, any>{
@@ -35,6 +36,9 @@ class Resultados extends Component<any, any>{
             :
                 store.resultados.generosCercanos.userName !== ''?
                 <ElementosPrincipales who={store.resultados.generosCercanos}/>
+            :
+                store.resultados.parchesMusicales.nombres !== ''?
+                <ParchesMusicales who={store.resultados.parchesMusicales}/>
             :
                 <div className='msg'>No hay resultados para mostrar</div>
             }
